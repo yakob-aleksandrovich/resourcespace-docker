@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 
 networks:
   frontend:
@@ -11,14 +11,13 @@ volumes:
 
 services:
   resourcespace:
-    image: resourcespace:latest
+    image: joppes/resourcespace:latest
     restart: unless-stopped
     depends_on:
       - mariadb
     volumes:
       - include:/var/www/html/include
       - filestore:/var/www/html/filestore
-      - ./testdir:/srv/storage/testdir
     networks:
       - frontend
       - backend

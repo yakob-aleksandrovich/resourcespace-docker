@@ -10,20 +10,15 @@ Starting with ResourceSpace 9.4 the containers are going to be based on Ubuntu:l
 
 ## docker-compose example
 
-In this example I use the pre-existing nginx proxy from my Nextcloud instance which also includes a LetsEncrypt companion to enforce https.
+The below docker compose file is a minimial working example.
 
 ```Dockerfile
-version: "2"
+version: "3.7"
 
-# frontend network for resourcespace using the already existing nginx proxy of Nextcloud
-# backend network without public accessibility for the database connection
 networks:
   frontend:
-    external:
-      name: fpm_proxy-tier
   backend:
-  
-# for some reason using a local mountpoint results in an HTTP error 500
+
 volumes:
   mariadb:
   include:
@@ -31,38 +26,26 @@ volumes:
 
 services:
   resourcespace:
-    image: suntorytimed/resourcespace:latest
+    image: joppes/resourcespace:latest
     restart: unless-stopped
-    # links resourcespace to mariadb container and makes it accessible via the URL mariadb
     depends_on:
       - mariadb
     volumes:
-      - include:/var/www/resourcespace/include
-      - filestore:/var/www/resourcespace/filestore
-    # variables for setting up https via the Let'sEncrypt companion
-    environment:
-      - HOSTNAME=dam.example.com
-      - VIRTUAL_HOST=dam.example.com
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=dam.example.com
-      - LETSENCRYPT_EMAIL=admin@example.com
-    # public and private network
+      - include:/var/www/html/include
+      - filestore:/var/www/html/filestore
     networks:
       - frontend
       - backend
-    # no port bind necessary due to the nginx proxy
-    expose:
-      - 80
-  
+    ports:
+      - 80:80
+
   mariadb:
     image: mariadb
     restart: unless-stopped
-    # env file containing the db configuration
     env_file:
       - db.env
     volumes:
       - mariadb:/var/lib/mysql
-    # only accesible in private network
     networks:
       - backend
 ```
