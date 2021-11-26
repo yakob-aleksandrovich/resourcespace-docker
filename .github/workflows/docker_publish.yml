@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'Dockerfile.latest'
+      - 'cronjob'
 
 jobs:
   publish-to-docker:
@@ -23,5 +26,5 @@ jobs:
           name: joppes/resourcespace
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          dockerfile: Dockerfile
+          dockerfile: Dockerfile.latest
           tags: ${{ env.DOCKER_TAGS }}
