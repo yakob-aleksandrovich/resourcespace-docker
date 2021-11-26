@@ -10,7 +10,7 @@ Starting with ResourceSpace 9.4 the containers are going to be based on Ubuntu:l
 
 ## docker-compose example
 
-The below docker compose file is a minimial working example.
+The below docker compose file is a minimal working example.
 
 ```Dockerfile
 version: "3.7"
