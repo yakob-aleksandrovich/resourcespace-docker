@@ -1,6 +1,6 @@
 # resourcespace-docker
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/joppes/resourcespace?style=flat-square)](https://hub.docker.com/r/joppes/resourcespace)
+[![Docker Pulls](https://hub.docker.com/r/joppes/resourcespace](https://hub.docker.com/r/joppes/resourcespace)
 
 A docker image for ResourceSpace based on Ubuntu 20.04 LTS including OpenCV, poppler and php7.4. Older versions of ResourceSpace (9.2 and 9.3) are still based on 18.04 LTS and don't include poppler but xpdf. They also use php7.2.
 
