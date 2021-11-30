@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     php-zip \
     php-apcu \
     php-curl \
+    php-intl \
     libapache2-mod-php \
     ffmpeg \
     libopencv-dev \
